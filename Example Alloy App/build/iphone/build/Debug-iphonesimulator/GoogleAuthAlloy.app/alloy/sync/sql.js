@@ -1,0 +1,1 @@
+/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/Resources/iphone/alloy/sync/sql.js

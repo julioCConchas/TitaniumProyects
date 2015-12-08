@@ -1,0 +1,7 @@
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/android/support/v7/appcompat/R.java"
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/com/fabreti/googleauthalloy/ApplicationStylesheet.java"
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/com/fabreti/googleauthalloy/GoogleauthalloyActivity.java"
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/com/fabreti/googleauthalloy/GoogleauthalloyAppInfo.java"
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/com/fabreti/googleauthalloy/GoogleauthalloyApplication.java"
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/com/fabreti/googleauthalloy/R.java"
+"/Users/ios/Downloads/Google-Auth-for-Titanium-master/Example Alloy App/build/android/gen/ti/modules/titanium/ui/R.java"
