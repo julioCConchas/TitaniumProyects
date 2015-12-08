@@ -1,0 +1,23 @@
+<Alloy>
+	<Window id="win" platform="android" onOpen="hiddenBar">
+		<View id="mapView" ns="Ti.Map"></View>
+		<ImageView id="menuIcon" onClick="showMenu"/>
+			<View id="login">
+					<ImageView id="logo">
+					<TextField id="txfUser"></TextField>
+					<TextField id="txfPass"></TextField>
+					<Button title="login" onClick="login"/>
+			</View>
+	</Window>
+    <Window id="win" platform="ios">
+		<View id="mapView" module="Ti.Map">
+			<ImageView id="menuIcon" onClick="showMenu"/>
+			<View id="login">
+					<ImageView id="logo">
+					<TextField id="txfUser"></TextField>
+					<TextField id="txfPass"></TextField>
+					<Button title="login" onClick="login"/>
+			</View>
+		</View>
+	</Window>
+</Alloy>

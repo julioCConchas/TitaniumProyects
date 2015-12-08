@@ -1,0 +1,8 @@
+<Alloy>
+    <Window id="win" platform="android" onOpen="hiddenBar">
+        <View id="settings"></View>
+    </Window>
+    <Window id="win" platform="ios" >
+        <Label>Hello settings</Label>
+    </Window>
+</Alloy>
