@@ -1,0 +1,24 @@
+"#win":{
+  backgroundColor:"white"
+}
+"#mapView":{
+  animate:true,
+  regionFit:true,
+  userLocation:true,
+  mapType: Ti.Map.SATELLITE_TYPE,
+  //mapType:Alloy.Globals.Map.HYBRID_TYPE,
+  region:{
+    latitude:20.658165,
+    longitude:-103.349762
+  }
+}
+"#mapView[platform=ios]":{
+    mapType:Alloy.Globals.Map.HYBRID_TYPE
+}
+"#btnBack":{
+  top:20,
+  left:15,
+  width: 50,
+  height: 50,
+  image:'/images/icono.flecha.izquierda.png'
+}

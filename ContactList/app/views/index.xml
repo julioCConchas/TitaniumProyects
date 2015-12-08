@@ -1,0 +1,16 @@
+<Alloy>
+<Window id="index" onFocus="showContacts" onOpen="hiddenTitle" platform="android">
+	<View id="bar">
+		<Label id="winTitle">Contacts</Label>
+		<ImageView id="abtnAdd" onClick="winAdd"/>
+	</View>
+  <TableView id="table" onClick="tableClicked"></TableView>
+</Window>
+<Window id="index" onFocus="showContacts" platform="ios">
+	<View id="bar">
+		<Label id="winTitle">Contacts</Label>
+		<ImageView id="abtnAdd" onClick="winAdd"/>
+	</View>
+  <TableView id="table" onClick="tableClicked"></TableView>
+</Window>
+</Alloy>

@@ -1,0 +1,34 @@
+"#index":{
+	backgroundColor:"#505450",
+}
+"#index[platform=ios]":{
+	orientation:[
+		Ti.UI.PORTRAIT,
+		Ti.UI.UPSIDE_PORTRAIT
+	]
+}
+"#winTitle":{
+	font:{
+		fontFamily:'KaushanScript-Regular'
+	}
+}
+"#table":{
+	backgroundColor:"#505450",
+	top:60
+}
+"#abtnAdd":{
+	image:"/images/iconoMas1.png",
+	width:40,
+	height:40,
+	top:10,
+	right:5
+}
+"#bar":{
+	backgroundColor:"#3B3D3B",
+	top:0,
+	width:Ti.UI.FILL,
+	height:60
+}
+"Label":{
+	color:"white"
+}

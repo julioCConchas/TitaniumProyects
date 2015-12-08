@@ -1,0 +1,59 @@
+"#win":{
+    backgroundColor:"#505450",
+    layout:'vertical'
+}
+"#scroll":{
+    showVerticalScrollIndicator:true,
+    showHorizontalScrollIndicator:true,
+    layout:'vertical'
+}
+"#winTitle[platform=ios]":{
+    color:"white"
+}
+"#infoView":{
+    top:10,
+    layout:'vertical',
+    width:Ti.UI.FILL,
+    height: 200
+}
+"#btnS":{
+    width:Ti.UI.FILL,
+    height:60,
+}
+"#bar":{
+    backgroundColor:"#3B3D3B",
+    top:0,
+    width:Ti.UI.FILL,
+    height:60
+}
+"ImageView":{
+    width:40,
+	height:40
+}
+"#abtnDelete":{
+	image:"/images/iconoMult.png",
+	top:10,
+	right:5
+}
+"#ibtnClose":{
+	image:"/images/icono.flecha.izquierda.png",
+	top:20,
+	left:5
+}
+"View":{
+    width:150,
+    height:100
+}
+"#imgContact":{
+    backgroundImage:"/images/people.png",
+}
+"#abtnCall":{
+	image:"/images/call.png",
+	top:10,
+	left:50
+}
+"#abtnMap":{
+	image:"/images/mapa.png",
+	top:10,
+	right:50
+}

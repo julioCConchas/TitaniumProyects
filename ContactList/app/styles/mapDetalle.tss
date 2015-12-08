@@ -1,0 +1,6 @@
+"#mapView":{
+  animate:true,
+  regionFit:true,
+  userLocation:true,
+  mapTyle:Ti.Map.STANDARD_TYPE,
+}

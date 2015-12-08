@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <id>com.JulioConchas.ContactList</id>
+    <name>ContactList</name>
+    <version>1.0</version>
+    <publisher>ios</publisher>
+    <url>http://</url>
+    <description>undefined</description>
+    <copyright>2015 by ios</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>true</fullscreen>
+    <navbar-hidden>true</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>30cb666b-629f-4e62-9666-2f6ac0925f8f</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios>
+        <plist>
+            <dict>
+               <!--
+		 <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+		-->
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+                <string>
+                        Please let me use you`re location
+                </string>
+            </dict>
+        </plist>
+    </ios>
+   <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest android:versionCode="123">
+            <application android:theme="@style/appcelerator">
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyB1ATGRrby9stkKxvdl3SBYxSVB5Kkm7yM"/>
+            </application>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
+        </manifest>
+    </android>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <!-- <theme>default</theme>-->
+    </mobileweb>
+    <modules>
+        <module platform="commonjs">ti.cloud</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+    </modules>
+    <deployment-targets>
+        <target device="android">true</target>
+        <target device="ipad">true</target>
+        <target device="iphone">true</target>
+        <target device="mobileweb">true</target>
+    </deployment-targets>
+    <sdk-version>4.0.0.GA</sdk-version>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+    <property name="appc-app-id" type="string">564bc044aebc8eff742c5aa9</property>
+    <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-development" type="string">dAcwz77vNuQJUzqEQHhztCcRjRE8BoRy</property>
+    <property name="acs-oauth-key-development" type="string">NISYVNzJzsgugnyZQtsNMmPhMLyQYA5F</property>
+    <property name="acs-api-key-development" type="string">DusI9atGUzHCIvNBZFT2So22oEH3QGuw</property>
+    <property name="acs-username-development" type="string">appc_app_user_dev</property>
+    <property name="acs-password-development" type="string">BTyrs3ExWq3ydhLR0x</property>
+    <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-production" type="string">RViuH3EAxBmsx7B3CCF2Buj273BqSKgb</property>
+    <property name="acs-oauth-key-production" type="string">1S7Br6NMIBiFuFqA1CWnIzZ7IXmMu1xm</property>
+    <property name="acs-api-key-production" type="string">G3CETjG6a6yFFbYusRDKI8TIYYJLWpb1</property>
+    <property name="acs-username-production" type="string">appc_app_user</property>
+    <property name="acs-password-production" type="string">WpfbTC1Zfq8UeDFkcv</property>
+    <property name="appc-org-id" type="string">100021803</property>
+    <property name="appc-creator-user-id" type="string">9f65214e-5c40-4d98-a262-567317f3a134</property>
+</ti:app>

@@ -1,0 +1,61 @@
+"#win":{
+	backgroundColor:"#505450",
+	layout:'vertical',
+}
+"#scroll":{
+      showVerticalScrollIndicator:true,
+      showHorizontalScrollIndicator:true,
+      layout:'vertical'
+ }
+"ImageView":{
+	width:40,
+	height:40
+}
+"TextField":{
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	top:10,
+	width: 250,
+	height:35,
+	color:'white',
+	hintTextColor:'#3B3D3B'
+}
+"#ibtnClose":{
+   	image:"/images/icono.flecha.izquierda.png",
+   	top:20,
+   	left:5
+}
+"#txfEmail":{
+	keyboardType:Ti.UI.KEYBOARD_EMAIL
+}
+"#txfCel":{
+	keyboardType:Ti.UI.KEYBOARD_PHONE_PAD
+}
+"#bar":{
+	backgroundColor:"#3B3D3B",
+	top:0,
+	width:Ti.UI.FILL,
+	height:60
+}
+"Label":{
+	color:"white"
+}
+"View":{
+	top:10,
+	width:150,
+	height:150
+}
+"#imgContact":{
+	//backgroundColor:"red"
+	backgroundImage:"/images/people.png",
+}
+"#abtnOk":{
+	image:"/images/iconoOk.png",
+	width:40,
+	height:40,
+	top:10,
+	right:5
+}
+"#abtnMap":{
+	image:"/images/mapa.png",
+	top:10,
+}

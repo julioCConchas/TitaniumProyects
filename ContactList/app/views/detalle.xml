@@ -1,0 +1,31 @@
+<Alloy>
+  <Window id="win" onOpen="hiddenTitle" platform="android">
+    <View id="bar">
+  		<Label id="winTitle"/>
+  		<ImageView id="abtnDelete"onClick="winDelete"/>
+  	</View>
+    <ScrollView id="scroll">
+        <View id="imgContact" top="10"></View>
+        <View id="infoView"/>
+      <View id="btnS">
+        <ImageView id="abtnCall" onClick="winCall"/>
+        <ImageView id="abtnMap" onClick="winMap"/>
+      </View>
+  </ScrollView>
+  </Window>
+  <Window id="win" platform="ios">
+    <ScrollView id="scroll">
+    <View id="bar">
+        <ImageView id="ibtnClose" onClick="winClose"/>
+  		<Label id="winTitle"/>
+  		<ImageView id="abtnDelete"onClick="winDelete"/>
+  	</View>
+    <View id="imgContact" top="10"></View>
+    <View id="infoView"/>
+  <View id="btnS">
+    <ImageView id="abtnCall" onClick="winCall"/>
+    <ImageView id="abtnMap" onClick="winMap"/>
+  </View>
+  </ScrollView>
+  </Window>
+</Alloy>

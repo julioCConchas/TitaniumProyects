@@ -1,0 +1,11 @@
+<Alloy>
+  <Window id="win" platform="android">
+      <View id="mapView" ns="Ti.Map" onClick="doClick"
+        onLongpress="setAnnotation" onRegionChanged="setLatLong"></View>
+  </Window>
+  <Window id="win" platform="ios">
+      <View id="mapView" module="Ti.Map" onClick="doClick"
+        onLongclick="setAnnotation" onRegionChanged="setLatLong"></View>
+        <ImageView id="btnBack" onClick="closeWin"/>
+  </Window>
+</Alloy>

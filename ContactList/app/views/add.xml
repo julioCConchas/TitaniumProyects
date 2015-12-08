@@ -1,0 +1,25 @@
+<Alloy>
+	<Window id="win">
+		<View id="bar">
+			<ImageView id="ibtnClose" platform="ios" onClick="winClose"/>
+			<Label id="winTitle">Add Contact</Label>
+			<ImageView id="abtnOk" onClick="addContact" />
+		</View>
+		<ScrollView id="scroll">
+			<View id="imgContact" onClick="setImage">
+				<OptionDialog id="Od" title="take the picture" onClick="option">
+					<Options>
+							<Option>Gallery</Option>
+							<Option>Camera</Option>
+					</Options>
+				</OptionDialog>
+			</View>
+			<TextField id="txfName" hintText='Name' />
+			<TextField id="txfCel" hintText='Cel'/>
+			<TextField id="txfEmail" hintText='Email'/>
+			<TextField id="txfAddress" hintText='Address'/>
+									<!--Address by map-->
+			<ImageView id="abtnMap" onClick="showMap"/>
+		</ScrollView>
+	</Window>
+</Alloy>
