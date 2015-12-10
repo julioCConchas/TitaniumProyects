@@ -3,20 +3,17 @@ var isAndroid = false;
 function login(){
     if($.txfUser.value == "jconchas@itexico.net" &&
        $.txfPass.value == "12011347"){
-           if(Ti.Platform.osname == "android"){
-               isAndroid = true;
                $.win.remove($.login);
-           }
-           else{
-               $.mapView.remove($.login);
-           }
+       }
+       else{
+           alert("Wrong user or password!.");
+           $.txfUser.setValue(null);
+           $.txfPass.setValue(null);
        }
        $.menuIcon.setVisible(true);
-       addNewAnnotation();
+      // addNewAnnotation();
        console.log("done");
 }
-
-
 function addNewAnnotation(){
     var addAnnotation;
         if(isAndroid){
@@ -42,26 +39,18 @@ function addNewAnnotation(){
     $.mapView.selectAnnotation(addAnnotation);
 }
 function showMenu(){
-    var win;
-        if(isAndroid){
-            win = Alloy.createController('settings').getView().open();
-        }
-        else{
-            win = Alloy.createController('settings').getView().open();
-        }
+    $.setting.setVisible(true);
+}
+
+if(Ti.Platform.osname == "android"){
+    isAndroid = true;
+    $.win.addEventListener('open',function(e){
+        $.win.activity.actionBar.hide();
+    });
+}
+function closeSett(){
+    $.setting.setVisible(false);
 }
 
 
-
-
-
-
-
-
-
-
-
-function hiddenBar(){
-    $.win.activity.actionBar.hide();
-}
 $.win.open();
