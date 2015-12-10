@@ -2,13 +2,29 @@
 	<Window id="win" onAndroid:back="closeSett" >
 		<View id="mapView" ns="Ti.Map" platform="android" ></View>
 		<View id="mapView" module="Ti.Map" platform="ios"></View>
-		<ImageView id="menuIcon" onClick="showMenu"/>
+		<View id="Bar">
+			<ImageView id="menuIcon" onClick="showMenu"/>
+			<ImageView id="logoBar"/>
+		</View>
 			<View id="login">
 					<ImageView id="logo">
 					<TextField id="txfUser"></TextField>
 					<TextField id="txfPass"></TextField>
 					<Button title="login" onClick="login"/>
 			</View>
-		<View id="setting"></View>
+		<View id="setting" onSwipe="closeSett">
+			<ImageView id="userImg"/>
+			<View id="listContainer">
+				<ListView id="list">
+				   <ListSection headerTitle="Personal Data">
+					   <ListItem title="Name"></ListItem>
+					   <ListItem title="Address"></ListItem>
+					   <ListItem title="Email"/>
+					   <ListItem title="Type fee"></ListItem>
+				   </ListSection>
+			  </ListView>
+		  </View>
+		  <Button title="Notification" onClick="showModal" top="30"/>
+		</View>
 	</Window>
 </Alloy>

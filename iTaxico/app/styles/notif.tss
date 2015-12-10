@@ -1,0 +1,4 @@
+"#win":{
+    backgroundColor:"white",
+    modal:true,
+}

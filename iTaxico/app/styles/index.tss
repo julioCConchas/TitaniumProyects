@@ -21,6 +21,9 @@
 "#mapView[platform=ios]":{
 	mapType:Alloy.Globals.Map.STANDARD_TYPE,
 }
+"Button":{
+	color:"white"
+}
 "#login":{
 	layout:"vertical",
 	backgroundColor:"#2052BF",
@@ -55,18 +58,57 @@
 	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	passwordMask :true
 }
+"#menuIcon[platform=android]":{
+	top:10,
+}
 "#menuIcon":{
-	image:"/images/show-menu-icon.png",
-	top:25,
-	left:20,
+	image:"/images/menu_mobile.png",
+	top:20,
+	left:15,
+	height: 30,
+	width: 30
+}
+"#Bar":{
+	backgroundColor:"#2052BF",
+	//layout:"horizontal",
+	width: Ti.UI.FILL,
 	height: 50,
-	width: 50,
+	top:0,
 	visible:false
+}
+"#Bar[platform=ios]":{
+	height: 60
+}
+"#logoBar":{
+	image:"/images/itaxicoLogo.png",
+	height: 50,
+	width: 100,
+	left:100
+}
+"#logoBar[platform=ios]":{
+	top:10
 }
 "#setting":{
 	backgroundColor:"#2052BF",
+	layout:"vertical",
 	left:0,
 	height: Ti.UI.FILL,
-	width: "90%",
+	width: "85%",
 	visible:false
+}
+"#userImg":{
+	image:"/images/people.jpg",
+	top:0,
+	width: Ti.UI.FILL,
+	height: 120
+}
+"#listContainer":{
+	width: Ti.UI.FILL,
+	height: 200
+}
+"#list":{
+	backgroundColor:"#2052BF"
+}
+"ListItem[platform=ios]":{
+	backgroundColor:"#2052BF"
 }
