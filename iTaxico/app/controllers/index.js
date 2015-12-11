@@ -2,7 +2,8 @@ var isAndroid = false;
 var first = false;
 
 function login(e){
-    if($.txfUser.value == "jconchas@itexico.net" &&
+    alert("google login");
+    /*if($.txfUser.value == "jconchas@itexico.net" &&
        $.txfPass.value == "12011347"){
                $.win.remove($.login);
                $.Bar.setVisible(true);
@@ -13,7 +14,7 @@ function login(e){
            $.txfUser.setValue(null);
            $.txfPass.setValue(null);
        }
-       console.log("done");
+       console.log("done");*/
 }
 function addNewAnnotation(e){
     var addAnnotation;
@@ -63,6 +64,18 @@ function closeSett(e){
     first = false;
 }
 function showModal(e){
-    var win = Alloy.createController('notif').getView().open({modal:true});
+
+    var win = Alloy.createController('notif').getView();
+
+    if(isAndroid){
+        win.open({
+            animated:true,
+            activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+            activityExitAnimation: Ti.Android.R.anim.slide_out_right
+        });
+    }
+    else{
+        win.open();
+    }
 }
 $.win.open();

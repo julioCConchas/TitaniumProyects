@@ -8,9 +8,12 @@
 		</View>
 			<View id="login">
 					<ImageView id="logo">
+					<ImageView id="googleLogin" onClick="login">
+					<!--
 					<TextField id="txfUser"></TextField>
 					<TextField id="txfPass"></TextField>
 					<Button title="login" onClick="login"/>
+				-->
 			</View>
 		<View id="setting" onSwipe="closeSett">
 			<ImageView id="userImg"/>

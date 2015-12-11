@@ -1,4 +1,18 @@
 "#win":{
-    backgroundColor:"white",
-    modal:true,
+    backgroundColor:"#2052BF",
+    fullscreen: false,
+    layout:"vertical",
+    modal:true
+}
+"#title[plarform=ios]":{
+    color:"white",
+    top:20
+}
+"#title":{
+    font:{
+        fontSize:24
+    }
+}
+"#tblNotif":{
+    backgroundColor:"#2052BF",
 }

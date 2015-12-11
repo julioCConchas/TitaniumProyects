@@ -14,6 +14,7 @@
 	regionFit:true
 }
 "#logo":{
+	top:50,
 	width: 200,
 	height: 70,
 	image:"/images/itaxicoLogo.png"
@@ -31,9 +32,13 @@
 	height: "40%",
 	width: "80%"
 }
-"#login[platform=android]":{
-	height: "50%",
+"#googleLogin":{
+	width: 150,
+	height: 30,
+	top:20,
+	image:"/images/sign-in-with-google.png"
 }
+/*
 "TextField":{
 	color: '#336699',
 	top:10,
@@ -57,7 +62,7 @@
 "#txfPass[platform=ios]":{
 	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	passwordMask :true
-}
+}*/
 "#menuIcon[platform=android]":{
 	top:10,
 }

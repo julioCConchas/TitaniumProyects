@@ -1,3 +1,6 @@
 <Alloy>
-	<Window id="win"></Window>
+	<Window id="win" onSwipe="closeWin">
+		<Label id="title">Notification</Label>
+		<TableView id="tblNotif"></TableView>
+	</Window>
 </Alloy>
