@@ -1,20 +1,17 @@
 var isAndroid = false;
 var first = false;
+var googleAuth = Alloy.Globals.googleAuth;
 
 function login(e){
-    alert("google login");
-    /*if($.txfUser.value == "jconchas@itexico.net" &&
-       $.txfPass.value == "12011347"){
-               $.win.remove($.login);
-               $.Bar.setVisible(true);
-               addNewAnnotation();
-       }
-       else{
-           alert("Wrong user or password!.");
-           $.txfUser.setValue(null);
-           $.txfPass.setValue(null);
-       }
-       console.log("done");*/
+    var xhrList
+    Ti.API.info('Authorized:' + googleAuth.isAuthorized());
+    /*googleAuth.isAuthorized(function(){
+        Ti.API.info('Access Token: ' + googleAuth.getAccessToken());
+
+    },function(){
+        Ti.API.info('Authorize google account.....');
+        googleAuth.authorize();
+    });*/
 }
 function addNewAnnotation(e){
     var addAnnotation;
