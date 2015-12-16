@@ -67,6 +67,7 @@ var GoogleAuth = function(e){
         return p;
     }
     function authorize(e){
+        console.log("authorize function");
         var spinner;
         var close;
         var url;
@@ -87,21 +88,24 @@ var GoogleAuth = function(e){
             });
         }
         spinner = Ti.UI.createActivityIndicator({
+            //animacion icono loading
             zIndex:1,
             height:50,
             hide:true,
             style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK
         });
+        win.add(spinner);
+        //*Esto no sirver para nada
+        //--------------------------------------------------
         close = Ti.UI.createButton({
             title: _opt.closeTitle
         });
-
-        win.add(spinner);
         win.rightNavButton = close;
 
         close.addEventListener('click',function(){
             win.close();
         });
+        //-------------------------------------------------
         url = prepareUrl();
 
         webview = Ti.UI.createWebView({
@@ -125,7 +129,8 @@ var GoogleAuth = function(e){
                 _prop.expiresIn = 0;
                 win.close();
             }
-            code = webview.evalJS('docuement.getElementById("code").value;');
+            code = webview.evalJS('document.getElementById("code").value;');
+            console.log("Code: " + code);
             if(code != ''){
                 log.debug('GoogleAuth: Acces granted!');
                 webview.hide();
@@ -247,14 +252,15 @@ var GoogleAuth = function(e){
     /**
     *Get TOKEN
     */
-    function getToken(code,e){
+    function getToken(code,cb){
         var xhr;
         var resp;
         var d;
-        e = (e) ? e :function(){};
+        cb = (cb) ? cb :function(){};
         xhr = Ti.Network.createHTTPClient({
             //function called when the response data is available
             onload :function(e){
+                /*log.info("inside1");
                 resp = JSON.parse(this.responseText);
                 log.info(resp.expires_in);
                 resp.expires_in = parseFloat(resp.expires_in,10) * 1000 + (new Date()).getTime();
@@ -268,15 +274,18 @@ var GoogleAuth = function(e){
                 _prop.expiresIn = resp.expires_in;
                 log.debug(_prop);
                 win.close();
-                e();
+                cb();*/
+                alert("success");
             },
             //function called when an error occurs, including a timeout
             onerror: function(e){
+                /*log.info("inside");
                 Ti.UI.createAlertDialog({
                     title: 'Error',
                     message: _opt.errorText
                 });
-                win.close();
+                win.close();*/
+                alert("error");
             },
             timeout : 5000
         });
@@ -302,7 +311,7 @@ var GoogleAuth = function(e){
         for(var i = 0;i < _opt.scope.length;i++){
             scope[i] = encodeURIComponent(_opt.scope[i]);
         }
-        url = _opt.url + '?' + 'approval_prompt=force&scope=' + scope.join('+') + '&' + 'response_type=code' + '&' + 'client_id=' + _opt.clientId + '&' + 'btmpl=mobile' + '';
+        url = _opt.url + '?' + 'approval_prompt=force&scope=' + scope.join('+') + '&' + 'redirect_uri=urn:ietf:wg:oauth:2.0:oob' + '&' +  'response_type=code' + '&' + 'client_id=' + _opt.clientId + '&' + 'btmpl=mobile' + '';
         log.debug(url);
         return url;
     }
@@ -312,7 +321,6 @@ var GoogleAuth = function(e){
         _prop = getProps();
         log.debug('Properties :): ' + JSON.stringify(_prop));
         if(_prop.accessToken != null && _prop.accessToken != ''){
-            console.log("here");
             if(_prop.expiresIn < (new Date()).getTime()){
                 refreshToken(eSuccess,eError);
             }
