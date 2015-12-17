@@ -3,9 +3,9 @@ var first = false;
 var googleAuth = Alloy.Globals.googleAuth;
 
 function login(e){
-    var sepa;
+
     Ti.API.info('Authorized:' + googleAuth.isAuthorized());
-    sepa = googleAuth.isAuthorized(function(){
+    googleAuth.isAuthorized(function(){
         console.log("Function one");
         Ti.API.info('Access Token: ' + googleAuth.getAccessToken());
 
@@ -14,7 +14,7 @@ function login(e){
         Ti.API.info('Authorize google account.....');
         googleAuth.authorize();
     });
-    console.log("sepa: " + sepa);
+
 }
 function addNewAnnotation(e){
     var addAnnotation;

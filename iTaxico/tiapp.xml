@@ -63,8 +63,6 @@
         <module platform="commonjs">ti.cloud</module>
         <module platform="iphone">ti.map</module>
         <module platform="android">ti.map</module>
-        <module platform="android">facebook</module>
-        <module platform="iphone">facebook</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

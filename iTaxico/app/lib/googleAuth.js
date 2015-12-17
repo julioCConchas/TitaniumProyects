@@ -11,7 +11,8 @@ var GoogleAuth = function(e){
         clientId : (e.clientId) ? e.clientId : null,
         clientSecret: (e.clientSecret) ? e.clientSecret : null,
         propertyName : (e.propertyName) ? e.propertyName : 'googleToken',
-        url : 'https://accounts.google.com/o/oauth2/auth',
+        //url : 'https://accounts.google.com/o/oauth2/auth',
+        url : 'https://accounts.google.com/o/oauth2/v2/auth',
         scope : (e.scope) ? e.scope :['https://www.googleapis.com/auth/tasks'],
         closeTitle : (e.closeTitle) ? e.closeTitle : 'Close',
         winTitle : (e.winTitle) ? e.winTitle : 'Google Account',
@@ -253,54 +254,35 @@ var GoogleAuth = function(e){
     *Get TOKEN
     */
     function getToken(code,cb){
-        var xhr;
-        var resp;
-        var d;
-        cb = (cb) ? cb :function(){};
-        xhr = Ti.Network.createHTTPClient({
-            //function called when the response data is available
-            onload :function(e){
-                /*log.info("inside1");
-                resp = JSON.parse(this.responseText);
-                log.info(resp.expires_in);
-                resp.expires_in = parseFloat(resp.expires_in,10) * 1000 + (new Date()).getTime();
-                log.info(resp.expires_in);
-                Ti.App.Properties.setString(_opt.propertyName + '.accessToken',resp.access_token);
-                Ti.App.Properties.setString(_opt.propertyName + '.refreshToken',resp.refresh_token);
-                Ti.App.Properties.setString(_opt.propertyName + '.tokenType',resp.token_type);
-                Ti.App.Properties.setString(_opt.propertyName + '.expiresIn',resp.expires_in);
-                _prop.accessToken = resp.acces_token;
-                _prop.refreshToken = resp.token_type;
-                _prop.expiresIn = resp.expires_in;
-                log.debug(_prop);
-                win.close();
-                cb();*/
-                alert("success");
+        var url;
+        console.log("getting token");
+        url = 'https://raw.githubusercontent.com/julioCConchas/JSON/master/json.txt';
+        //url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=1/fFBGRNJru1FQd44AzqT3Zg';
+        //url = 'https://accounts.google.com/o/oauth2/token';
+        //https://accounts.google.com/o/oauth2/v2/auth
+        var xhr = Ti.Network.createHTTPClient({
+            onload:function(e){
+                alert(this.responseText);
             },
-            //function called when an error occurs, including a timeout
-            onerror: function(e){
-                /*log.info("inside");
-                Ti.UI.createAlertDialog({
-                    title: 'Error',
-                    message: _opt.errorText
-                });
-                win.close();*/
-                alert("error");
+            error:function(e){
+                Ti.API.info('1:' + this.responseText);
+                Ti.API.info('2:' + this.status);
+                Ti.API.info('3:' + e.error);
             },
-            timeout : 5000
+            timeout: 5000
         });
-        //Prepare the connection.
-        xhr.open("POST",'https://accounts.google.com/o/oauth2/token');
-        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-        d = {
-            code:code,
-            client_id:_opt.clientId,
-            client_secret: _opt.clientSecret,
-            redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
-            grant_type: 'authorization_code'
-        }
-        //send the request.
-        xhr.send(d);
+        xhr.open('GET',url);
+        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        var d = {
+			code : code,
+			client_id : _opt.clientId,
+			client_secret : _opt.clientSecret,
+			//redirect_uri : 'urn:ietf:wg:oauth:2.0:oob',
+			grant_type :  'http://oauth.net/grant_type/device/1.0.'//'authorization_code'
+		};
+        xhr.send();
+        //win.close();
+
     }
     /**
     *   Prepare url from options
