@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" onAndroid:back="closeSett" >
+	<Window id="win" onAndroid:back="closeSett" onOpen="loginChek">
 		<View id="mapView" ns="Ti.Map" platform="android" ></View>
 		<View id="mapView" module="Ti.Map" platform="ios"></View>
 		<View id="Bar">

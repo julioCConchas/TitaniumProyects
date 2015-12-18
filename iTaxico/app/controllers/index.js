@@ -1,9 +1,9 @@
 var isAndroid = false;
 var first = false;
+var info = {};
 var googleAuth = Alloy.Globals.googleAuth;
 
 function login(e){
-
     Ti.API.info('Authorized:' + googleAuth.isAuthorized());
     googleAuth.isAuthorized(function(){
         console.log("Function one");
@@ -13,12 +13,43 @@ function login(e){
         console.log("Function two");
         Ti.API.info('Authorize google account.....');
         googleAuth.authorize(function(){
-            if(googleAuth.isAuthorized()){
-                $.win.remove($.login);
-                $.Bar.setVisible(true);
-            }
+            hiddenLoginView();
+            getUserInfo();
         });
     });
+}
+function getUserInfo(){
+    var xhr;
+    var resp;
+    var data = {};
+        xhr = Ti.Network.createHTTPClient({
+            onload : function(e){
+                resp = JSON.parse(this.responseText);
+                info.name = resp.name;
+                info.givenName = resp.given_name;
+                info.email = resp.email;
+            },
+            onerror : function(e){
+                log.info(e.error);
+                log.info(this.responseText);
+                log.info(this.status);
+            },
+            timeout : 5000
+        });
+        xhr.open("GET",'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + googleAuth.getAccessToken());
+        xhr.send();
+}
+function hiddenLoginView(){
+    if(googleAuth.isAuthorized()){
+        $.win.remove($.login);
+        $.Bar.setVisible(true);
+    }
+}
+function loginChek(){
+    if(googleAuth.isAuthorized()){
+        $.win.remove($.login);
+        $.Bar.setVisible(true);
+    }
 }
 function addNewAnnotation(e){
     var addAnnotation;

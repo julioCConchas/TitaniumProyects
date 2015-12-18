@@ -16,5 +16,5 @@ Alloy.Globals.googleAuth = new Alloy.Globals.GoogleAuth_module({
 	clientSecret:'01vUdkmlPvwW29irSbVmbZly',
 	propertyName : 'googleToken',
 	quiet: false,
-	scope : [ 'https://www.googleapis.com/auth/tasks', 'https://www.googleapis.com/auth/tasks.readonly' ]
+	scope : ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']//[ 'https://www.googleapis.com/auth/tasks', 'https://www.googleapis.com/auth/tasks.readonly' ]
 });
