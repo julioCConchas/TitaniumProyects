@@ -11,8 +11,8 @@ var GoogleAuth = function(e){
         clientId : (e.clientId) ? e.clientId : null,
         clientSecret: (e.clientSecret) ? e.clientSecret : null,
         propertyName : (e.propertyName) ? e.propertyName : 'googleToken',
-        //url : 'https://accounts.google.com/o/oauth2/auth',
-        url : 'https://accounts.google.com/o/oauth2/v2/auth',
+        url : 'https://accounts.google.com/o/oauth2/auth',
+        //url : 'https://accounts.google.com/o/oauth2/v2/auth',
         scope : (e.scope) ? e.scope :['https://www.googleapis.com/auth/tasks'],
         closeTitle : (e.closeTitle) ? e.closeTitle : 'Close',
         winTitle : (e.winTitle) ? e.winTitle : 'Google Account',
@@ -67,7 +67,7 @@ var GoogleAuth = function(e){
         p.expiresIn = Ti.App.Properties.getString(_opt.propertyName + '.expiresIn');
         return p;
     }
-    function authorize(e){
+    function authorize(cb){
         console.log("authorize function");
         var spinner;
         var close;
@@ -76,7 +76,7 @@ var GoogleAuth = function(e){
         var c = 0;
         var code;
 
-        e = (e) ? e :function(){};
+        cb = (cb) ? cb :function(){};
         win = Ti.UI.createWindow({
             backgroundColor : 'white',
             borColor:_opt.winColor,
@@ -131,12 +131,11 @@ var GoogleAuth = function(e){
                 win.close();
             }
             code = webview.evalJS('document.getElementById("code").value;');
-            console.log("Code: " + code);
             if(code != ''){
                 log.debug('GoogleAuth: Acces granted!');
                 webview.hide();
                 spinner.show();
-                getToken(code,e);
+                getToken(code,cb);
             }
             if(c > 10){
                 //some error (to many requests:)
@@ -254,33 +253,45 @@ var GoogleAuth = function(e){
     *Get TOKEN
     */
     function getToken(code,cb){
-        var url;
+        cb = (cb) ? cb : function(){};
         console.log("getting token");
-        url = 'https://raw.githubusercontent.com/julioCConchas/JSON/master/json.txt';
-        //url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=1/fFBGRNJru1FQd44AzqT3Zg';
-        //url = 'https://accounts.google.com/o/oauth2/token';
-        //https://accounts.google.com/o/oauth2/v2/auth
         var xhr = Ti.Network.createHTTPClient({
             onload:function(e){
-                alert(this.responseText);
+                var resp = JSON.parse(this.responseText);
+                log.info(resp.expires_in);
+                resp.expires_in = parseFloat(resp.expires_in,10) * 1000 + (new Date()).getTime();
+                log.info(resp.expires_in);
+                Ti.App.Properties.setString(_opt.propertyName + '.accessToken', resp.access_token);
+                Ti.App.Properties.setString(_opt.propertyName + '.refreshToken',resp.refresh_token);
+                Ti.App.Properties.setString(_opt.propertyName + '.tokenType', resp.token_type);
+                Ti.App.Properties.setString(_opt.propertyName + '.expiresIn', resp.expires_in);
+                _prop.accessToken = resp.access_token;
+                _prop.refreshToken = resp.refresh_token;
+                _prop.tokenType = resp.token_type;
+                _prop.expiresIn = resp.expires_in;
+                log.debug(_prop);
+                win.close();
+                cb();
             },
-            error:function(e){
-                Ti.API.info('1:' + this.responseText);
-                Ti.API.info('2:' + this.status);
-                Ti.API.info('3:' + e.error);
+            onerror:function(e){
+                Ti.UI.createAlerDialog({
+                    title: 'Error',
+                    message : _opt.errorText
+                });
+                win.close();
             },
             timeout: 5000
         });
-        xhr.open('GET',url);
-        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.open("POST",'https://accounts.google.com/o/oauth2/token');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         var d = {
 			code : code,
 			client_id : _opt.clientId,
 			client_secret : _opt.clientSecret,
-			//redirect_uri : 'urn:ietf:wg:oauth:2.0:oob',
-			grant_type :  'http://oauth.net/grant_type/device/1.0.'//'authorization_code'
+			redirect_uri : 'urn:ietf:wg:oauth:2.0:oob',
+			grant_type : 'authorization_code'
 		};
-        xhr.send();
+        xhr.send(d);
         //win.close();
 
     }

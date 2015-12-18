@@ -12,9 +12,13 @@ function login(e){
     },function(){
         console.log("Function two");
         Ti.API.info('Authorize google account.....');
-        googleAuth.authorize();
+        googleAuth.authorize(function(){
+            if(googleAuth.isAuthorized()){
+                $.win.remove($.login);
+                $.Bar.setVisible(true);
+            }
+        });
     });
-
 }
 function addNewAnnotation(e){
     var addAnnotation;
