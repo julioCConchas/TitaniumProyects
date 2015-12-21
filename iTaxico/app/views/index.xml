@@ -10,22 +10,12 @@
 			<View id="login">
 					<ImageView id="logo">
 					<ImageView id="googleLogin" onClick="login">
-					<!--
-					<TextField id="txfUser"></TextField>
-					<TextField id="txfPass"></TextField>
-					<Button title="login" onClick="login"/>
-					-->
 			</View>
 		<View id="setting" onSwipe="closeSett">
 			<ImageView id="userImg"/>
 			<View id="listContainer">
 				<ListView id="list">
-				   <ListSection headerTitle="Personal Data">
-					   <ListItem title="Name"></ListItem>
-					   <ListItem title="Address"></ListItem>
-					   <ListItem title="Email"/>
-					   <ListItem title="Type fee"></ListItem>
-				   </ListSection>
+				   <ListSection id="listS" />
 			  </ListView>
 		  </View>
 		  <Button title="Notification" onClick="showModal" top="30"/>

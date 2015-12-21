@@ -314,7 +314,9 @@ var GoogleAuth = function(e){
         _prop = getProps();
         log.debug('Properties :): ' + JSON.stringify(_prop));
         if(_prop.accessToken != null && _prop.accessToken != ''){
+            console.log("no expire yet ->> " + (new Date()).getTime());
             if(_prop.expiresIn < (new Date()).getTime()){
+                console.log("expire here");
                 refreshToken(eSuccess,eError);
             }
             else{

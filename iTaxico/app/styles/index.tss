@@ -114,6 +114,3 @@
 "#list":{
 	backgroundColor:"#2052BF"
 }
-"ListItem[platform=ios]":{
-	backgroundColor:"#2052BF"
-}

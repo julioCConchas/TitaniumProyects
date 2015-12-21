@@ -3,6 +3,18 @@ var first = false;
 var info = {};
 var googleAuth = Alloy.Globals.googleAuth;
 
+Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+Ti.Geolocation.distanceFilter = 10;
+
+Ti.Geolocation.getCurrentPosition(function(e){
+    if(e.error){
+        alert("SEPA QUE CAN'T GET U CURREN LOCAITON");
+        return;
+    }
+    alert("latitude: " + e.coords.latitude + "\nlongitude: " + e.coords.longitude);
+    e.coords.longitude;
+    var latitude = e.coords.latitude;
+});
 function login(e){
     Ti.API.info('Authorized:' + googleAuth.isAuthorized());
     googleAuth.isAuthorized(function(){
@@ -13,7 +25,7 @@ function login(e){
         console.log("Function two");
         Ti.API.info('Authorize google account.....');
         googleAuth.authorize(function(){
-            hiddenLoginView();
+            loginChek();
             getUserInfo();
         });
     });
@@ -28,6 +40,8 @@ function getUserInfo(){
                 info.name = resp.name;
                 info.givenName = resp.given_name;
                 info.email = resp.email;
+                //console.log("Name: " + info.name + "\nGivenName: " + info.givenName + "\nEmail :" + info.email);
+                addNewAnnotation(info.givenName);
             },
             onerror : function(e){
                 log.info(e.error);
@@ -39,19 +53,14 @@ function getUserInfo(){
         xhr.open("GET",'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + googleAuth.getAccessToken());
         xhr.send();
 }
-function hiddenLoginView(){
-    if(googleAuth.isAuthorized()){
-        $.win.remove($.login);
-        $.Bar.setVisible(true);
-    }
-}
 function loginChek(){
     if(googleAuth.isAuthorized()){
+        getUserInfo();
         $.win.remove($.login);
         $.Bar.setVisible(true);
     }
 }
-function addNewAnnotation(e){
+function addNewAnnotation(name){
     var addAnnotation;
         if(isAndroid){
             addAnnotation = Ti.Map.createAnnotation({
@@ -67,7 +76,7 @@ function addNewAnnotation(e){
                 longitude:-103.349762
             });
         }
-        addAnnotation.title = "Peña";
+        addAnnotation.title = name;
         addAnnotation.subtitle = ":D";
         addAnnotation.animate = true;
         addAnnotation.dragable = true;
@@ -76,6 +85,24 @@ function addNewAnnotation(e){
     $.mapView.selectAnnotation(addAnnotation);
 }
 function showMenu(e){
+    var items = [
+    	{
+            properties : {
+                title: info.name,
+                backgroundColor:"#2052BF",
+                color:"#08E3FB"
+            }
+        },
+    	{
+            properties : {
+                title: info.email,
+                backgroundColor:"#2052BF",
+                color:"#08E3FB"
+            }
+        }
+    ];
+    $.listS.setHeaderTitle(info.givenName);
+    $.list.sections[0].setItems(items);
     if(!first){
         first = true;
         $.setting.setVisible(true);
