@@ -235,7 +235,8 @@ var GoogleAuth = function(e){
                 });
                 eError();
             },
-            timeout: 5000
+            timeout: 5000,
+			validatesSecureCertificate: true
         });
         //Prepare the connection.
         xhr.open("POST",_opt.url);
@@ -245,7 +246,7 @@ var GoogleAuth = function(e){
             client_secret:_opt.clientSecret,
             refresh_token: _prop.refreshToken,
             grant_type: 'refresh_token'
-        }
+        };
         //send the request.
         xhr.send(d);
     }
@@ -253,11 +254,13 @@ var GoogleAuth = function(e){
     *Get TOKEN
     */
     function getToken(code,cb){
+    	var dialog;
         cb = (cb) ? cb : function(){};
         console.log("getting token");
         var xhr = Ti.Network.createHTTPClient({
             onload:function(e){
-                var resp = JSON.parse(this.responseText);
+            	//alert(this.responseText);
+              var resp = JSON.parse(this.responseText);
                 log.info(resp.expires_in);
                 resp.expires_in = parseFloat(resp.expires_in,10) * 1000 + (new Date()).getTime();
                 log.info(resp.expires_in);
@@ -274,13 +277,16 @@ var GoogleAuth = function(e){
                 cb();
             },
             onerror:function(e){
-                Ti.UI.createAlerDialog({
+            	//Ti.API.info(e.error);
+              dialog = Ti.UI.createAlerDialog({
                     title: 'Error',
                     message : _opt.errorText
                 });
+               	dialog.show();
                 win.close();
             },
-            timeout: 5000
+            timeout: 5000,
+            validatesSecureCertificate: true
         });
         xhr.open("POST",'https://accounts.google.com/o/oauth2/token');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

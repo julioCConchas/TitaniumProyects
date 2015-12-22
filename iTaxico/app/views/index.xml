@@ -8,8 +8,9 @@
 		</View>
 
 			<View id="login">
-					<ImageView id="logo">
-					<ImageView id="googleLogin" onClick="login">
+					<ImageView id="logo"/>
+					<!--<ImageView id="googleLogin" onClick="login"/>-->
+					<Button id="googleLogin" onClick="login"/>
 			</View>
 		<View id="setting" onSwipe="closeSett">
 			<ImageView id="userImg"/>

@@ -8,12 +8,10 @@ Ti.Geolocation.distanceFilter = 10;
 
 Ti.Geolocation.getCurrentPosition(function(e){
     if(e.error){
-        alert("SEPA QUE CAN'T GET U CURREN LOCAITON");
+        //alert("SEPA QUE CAN'T GET U CURREN LOCAITON");
         return;
     }
     alert("latitude: " + e.coords.latitude + "\nlongitude: " + e.coords.longitude);
-    e.coords.longitude;
-    var latitude = e.coords.latitude;
 });
 function login(e){
     Ti.API.info('Authorized:' + googleAuth.isAuthorized());
@@ -48,7 +46,8 @@ function getUserInfo(){
                 log.info(this.responseText);
                 log.info(this.status);
             },
-            timeout : 5000
+            timeout : 5000,
+            validatesSecureCertificate: true
         });
         xhr.open("GET",'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + googleAuth.getAccessToken());
         xhr.send();
@@ -58,6 +57,7 @@ function loginChek(){
         getUserInfo();
         $.win.remove($.login);
         $.Bar.setVisible(true);
+        $.mapView.setTouchEnabled(true);
     }
 }
 function addNewAnnotation(name){
@@ -106,12 +106,12 @@ function showMenu(e){
     if(!first){
         first = true;
         $.setting.setVisible(true);
-        $.menuIcon.setLeft(280);
+        $.menuIcon.setLeft("87%");
     }
     else{
         first = false;
         $.setting.setVisible(false);
-        $.menuIcon.setLeft(15);
+        $.menuIcon.setLeft("5%");
     }
 }
 if(Ti.Platform.osname == "android"){
@@ -122,7 +122,7 @@ if(Ti.Platform.osname == "android"){
 }
 function closeSett(e){
     $.setting.setVisible(false);
-    $.menuIcon.setLeft(15);
+    $.menuIcon.setLeft("5%");
     first = false;
 }
 function showModal(e){

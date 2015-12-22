@@ -11,12 +11,13 @@
 	  latitudeDelta:0.1,
 	  longitudeDelta:0.1
     },
-	regionFit:true
+	regionFit:true,
+	touchEnabled: false
 }
 "#logo":{
-	top:50,
-	width: 200,
-	height: 70,
+	top:25,
+	width: "90%",
+	height: "50%",
 	image:"/images/itaxicoLogo.png"
 }
 "#mapView[platform=ios]":{
@@ -33,43 +34,18 @@
 	width: "80%"
 }
 "#googleLogin":{
-	width: 150,
-	height: 30,
+	width: "60%",
+	height: "15%",
 	top:20,
-	image:"/images/sign-in-with-google.png"
+	backgroundImage:"/images/sign-in-with-google.png"
 }
-/*
-"TextField":{
-	color: '#336699',
-	top:10,
-	height:30,
-	width:"75%"
-}
-"#txfUser[platform=android]":{
-	color: 'white',
-	height:35,
-  	keyboardType:Ti.UI.KEYBOARD_EMAIL
-}
-"#txfPass[platform=android]":{
-	color: 'white',
-	height:35,
-	passwordMask :true
-}
-"#txfUser[platform=ios]":{
-	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-  	keyboardType:Ti.UI.KEYBOARD_EMAIL
-}
-"#txfPass[platform=ios]":{
-	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	passwordMask :true
-}*/
 "#menuIcon[platform=android]":{
 	top:10,
 }
 "#menuIcon":{
 	image:"/images/menu_mobile.png",
 	top:20,
-	left:15,
+	left:"5%",
 	height: 30,
 	width: 30
 }
@@ -88,12 +64,13 @@
 	image:"/images/itaxicoLogo.png",
 	height: 50,
 	width: 100,
-	left:100
+	left:"34%"
 }
 "#logoBar[platform=ios]":{
 	top:10
 }
 "#setting":{
+	top:50,
 	backgroundColor:"#2052BF",
 	layout:"vertical",
 	left:0,
