@@ -11,8 +11,8 @@ var GoogleAuth = function(e){
         clientId : (e.clientId) ? e.clientId : null,
         clientSecret: (e.clientSecret) ? e.clientSecret : null,
         propertyName : (e.propertyName) ? e.propertyName : 'googleToken',
-        url : 'https://accounts.google.com/o/oauth2/auth',
-        //url : 'https://accounts.google.com/o/oauth2/v2/auth',
+        //url : 'https://accounts.google.com/o/oauth2/auth',
+        url : 'https://accounts.google.com/o/oauth2/v2/auth',
         scope : (e.scope) ? e.scope :['https://www.googleapis.com/auth/tasks'],
         closeTitle : (e.closeTitle) ? e.closeTitle : 'Close',
         winTitle : (e.winTitle) ? e.winTitle : 'Google Account',
@@ -213,14 +213,15 @@ var GoogleAuth = function(e){
             //function called when the response data is available
             onload : function(e){
                 resp = JSON.parse(this.responseText);
-                resp.espires_in = parseFloat(resp.expires_in, 10) * 1000 + (new Date()).getTime();
+              //resp.expires_in = parseFloat(resp.expires_in,10) * 1000 + (new Date()).getTime();
+                resp.expires_in = parseFloat(resp.expires_in,10) * 1000 + (new Date()).getTime();
                 Ti.App.Properties.setString(_opt.propertyName + '.accessToken',resp.access_token);
                 Ti.App.Properties.setString(_opt.propertyName + '.tokenType',resp.roken_type);
                 Ti.App.Properties.setString(_opt.propertyName + '.expiresIn',resp.expires_in);
                 _prop.accessToken = resp.access_token;
                 _prop.tokenType = resp.token_type;
                 _prop.expiresIn = resp.expires_in;
-                log.debug(_porp);
+                log.debug(_prop.expiresIn);
                 eSuccess();
             },
             //function called when an error accurs, including a timeout
@@ -239,7 +240,7 @@ var GoogleAuth = function(e){
 			validatesSecureCertificate: true
         });
         //Prepare the connection.
-        xhr.open("POST",_opt.url);
+        xhr.open("POST",'https://www.googleapis.com/oauth2/v4/token'/*_opt.url*/);
         xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
         d = {
             client_id:_opt.clientId,

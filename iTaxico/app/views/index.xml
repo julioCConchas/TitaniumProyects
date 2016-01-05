@@ -1,7 +1,7 @@
 <Alloy>
 	<Window id="win" onAndroid:back="closeSett" onOpen="loginChek">
-		<View id="mapView" ns="Ti.Map" platform="android" ></View>
-		<View id="mapView" module="Ti.Map" platform="ios"></View>
+		<View id="mapView" ns="Ti.Map" platform="android" onClick="doClick"></View>
+		<View id="mapView" module="Ti.Map" platform="ios" onClick="doClick"></View>
 		<View id="Bar">
 			<ImageView id="menuIcon" onClick="showMenu"/>
 			<ImageView id="logoBar"/>

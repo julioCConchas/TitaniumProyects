@@ -28,7 +28,7 @@
 }
 "#login":{
 	layout:"vertical",
-	backgroundColor:"#2052BF",
+	backgroundColor:"#072775",
 	borderRadius:20,
 	height: "40%",
 	width: "80%"
@@ -50,7 +50,7 @@
 	width: 30
 }
 "#Bar":{
-	backgroundColor:"#2052BF",
+	backgroundColor:"#072775",
 	//layout:"horizontal",
 	width: Ti.UI.FILL,
 	height: 50,
@@ -71,7 +71,7 @@
 }
 "#setting":{
 	top:50,
-	backgroundColor:"#2052BF",
+	backgroundColor:"#072775",
 	layout:"vertical",
 	left:0,
 	height: Ti.UI.FILL,
@@ -89,5 +89,5 @@
 	height: 200
 }
 "#list":{
-	backgroundColor:"#2052BF"
+	backgroundColor:"#072775",
 }

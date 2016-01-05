@@ -1,5 +1,5 @@
 "#win":{
-    backgroundColor:"#2052BF",
+    backgroundColor:"#072775",
     fullscreen: false,
     layout:"vertical",
     modal:true
@@ -14,5 +14,5 @@
     }
 }
 "#tblNotif":{
-    backgroundColor:"#2052BF",
+    backgroundColor:"#072775",
 }
