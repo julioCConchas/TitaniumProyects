@@ -6,7 +6,6 @@
 			<ImageView id="menuIcon" onClick="showMenu"/>
 			<ImageView id="logoBar"/>
 		</View>
-
 			<View id="login">
 					<ImageView id="logo"/>
 					<!--<ImageView id="googleLogin" onClick="login"/>-->
@@ -20,6 +19,11 @@
 			  </ListView>
 		  </View>
 		  <Button title="Notification" onClick="showModal" top="30"/>
+		</View>
+		<View id="modal" onClick="closeModal"></View>
+		<View id="detalle">
+			<ImageView id="imgEmpl"/>
+			<Button id="ride"/>
 		</View>
 	</Window>
 </Alloy>

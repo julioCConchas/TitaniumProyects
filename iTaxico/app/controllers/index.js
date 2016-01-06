@@ -5,6 +5,7 @@ var info = {};
 var googleAuth = Alloy.Globals.googleAuth;
 var geoInfo = {};
 var routeRemove;
+var empImgs = [];
 
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
 Ti.Geolocation.distanceFilter = 10;
@@ -54,7 +55,16 @@ var notification = Titanium.Android.createNotification({
 
 //--------------------------------------------->
 function doClick(e){
-    console.log(e.annotation);
+    var img;
+
+        for (var i = 0,size = empImgs.length; i < size; i++) {
+            if(e.annotation.title == empImgs[i].name){
+                $.imgEmpl.setImage(empImgs[i].image);
+            }
+        }
+    $.modal.setVisible(true);
+    $.detalle.setVisible(true);
+
     if(flag == false){
         createRoutes(e.annotation.latitude,e.annotation.longitude);
         flag = true;
@@ -64,8 +74,6 @@ function doClick(e){
         $.mapView.removeRoute(routeRemove);
         createRoutes(e.annotation.latitude,e.annotation.longitude);
     }
-
-
 }
 function login(e){
     Ti.API.info('Authorized:' + googleAuth.isAuthorized());
@@ -90,6 +98,38 @@ function setAnnotations(){
     addNewAnnotation("Pancho",20.713446,-103.318882,null);
     addNewAnnotation("Office",20.65731664,-103.39767158,null);
 }
+function getEmployees(){
+    var xhr;
+    var reso;
+    var employee;
+
+        xhr = Ti.Network.createHTTPClient({
+            onload : function(e){
+                //console.log(this.responseText);
+                resp = JSON.parse(this.responseText);
+                for (var i = 0, length = resp.employees.length; i < length; i++) {
+                    employee = resp.employees[i];
+                    /*console.log("name: " + employee.name + "\n" + "Addrees: " + employee.addrees + "\n" + "Image: " + employee.image + "\n" +
+                "Latitude: " + employee.latitude + "\n" + "Longitude: " + employee.longitude);
+                    console.log("<--------------------------------------------------->");*/
+                    info.name = employee.name;
+                    info.image = employee.image;
+                    empImgs.push({
+                        name : employee.name,
+                        image : employee.image
+                    });
+                    addNewAnnotation(employee.name,employee.addrees,employee.image,employee.latitude,employee.longitude);
+                }
+            },
+            onerror : function(e){
+                log.info(e.error);
+                log.info(this.responseText);
+                log.info(this.status);
+            }
+        });
+        xhr.open("GET",'https://raw.githubusercontent.com/julioCConchas/JSON/master/employees.txt');
+        xhr.send();
+}
 function getUserInfo(){
     var xhr;
     var resp;
@@ -100,7 +140,7 @@ function getUserInfo(){
                 info.name = resp.name;
                 info.givenName = resp.given_name;
                 info.email = resp.email;
-                addNewAnnotation(info.givenName,geoInfo.latitude,geoInfo.longitude,'green');
+                //addNewAnnotation(info.givenName,geoInfo.latitude,geoInfo.longitude);
             },
             onerror : function(e){
                 log.info(e.error);
@@ -119,11 +159,12 @@ function loginChek(){
         $.win.remove($.login);
         $.Bar.setVisible(true);
         $.mapView.setTouchEnabled(true);
-        setAnnotations();
+        //setAnnotations();
     }
     Titanium.Android.NotificationManager.notify(1, notification);
+    getEmployees();
 }
-function addNewAnnotation(name,latitude,longitude,color){
+function addNewAnnotation(name,addrees,image,latitude,longitude){
     var addAnnotation;
         if(isAndroid){
             addAnnotation = Ti.Map.createAnnotation();
@@ -132,9 +173,8 @@ function addNewAnnotation(name,latitude,longitude,color){
             addAnnotation = Alloy.Globals.Map.createAnnotation();
         }
         addAnnotation.title = name;
-        addAnnotation.subtitle = ":D";
+        addAnnotation.subtitle = addrees;
         addAnnotation.image = "/images/pin.png";
-        addAnnotation.leftButton = '/images/itaxicoLogo.png';
         addAnnotation.latitude = latitude;
         addAnnotation.longitude = longitude;
         addAnnotation.animate = true;
@@ -235,10 +275,16 @@ if(Ti.Platform.osname == "android"){
         $.win.activity.actionBar.hide();
     });
 }
+function closeModal(e){
+    $.modal.setVisible(false);
+    $.detalle.setVisible(false);
+}
 function closeSett(e){
     $.setting.setVisible(false);
     $.menuIcon.setLeft("5%");
     first = false;
+    $.modal.setVisible(false);
+    $.detalle.setVisible(false);
 }
 function showModal(e){
 

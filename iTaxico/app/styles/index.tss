@@ -1,6 +1,29 @@
 "#win":{
 	backgroundColor:"white"
 }
+"#modal":{
+	backgroundColor:"black",
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL,
+	opacity: 0.5,
+	visible: false
+}
+"#detalle":{
+	backgroundColor:"#072775",
+	width: Ti.UI.FILL,
+	height: "30%",
+	visible: false
+}
+"#imgEmpl":{
+	height: "70%",
+	width: "40%",
+	left: "5%"
+}
+"#ride":{
+	title:"raite",
+	bottom: "5%",
+	right: "20%"
+}
 "#mapView":{
 	animate:true,
 	userLocation:true,
