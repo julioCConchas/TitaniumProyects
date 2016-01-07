@@ -105,27 +105,30 @@ function getEmployees(){
 
         xhr = Ti.Network.createHTTPClient({
             onload : function(e){
-                //console.log(this.responseText);
                 resp = JSON.parse(this.responseText);
                 for (var i = 0, length = resp.employees.length; i < length; i++) {
                     employee = resp.employees[i];
-                    /*console.log("name: " + employee.name + "\n" + "Addrees: " + employee.addrees + "\n" + "Image: " + employee.image + "\n" +
-                "Latitude: " + employee.latitude + "\n" + "Longitude: " + employee.longitude);
-                    console.log("<--------------------------------------------------->");*/
                     info.name = employee.name;
                     info.image = employee.image;
                     empImgs.push({
                         name : employee.name,
                         image : employee.image
                     });
-                    addNewAnnotation(employee.name,employee.addrees,employee.image,employee.latitude,employee.longitude);
+                    addNewAnnotation(employee.name,employee.addrees,employee.latitude,employee.longitude);
                 }
+                //test
+                empImgs.push({
+                    name: "Julio César",
+                    image : "/images/people.jpg"
+                });
             },
             onerror : function(e){
                 log.info(e.error);
                 log.info(this.responseText);
                 log.info(this.status);
-            }
+            },
+            timeout : 5000,
+            validatesSecureCertificate : true
         });
         xhr.open("GET",'https://raw.githubusercontent.com/julioCConchas/JSON/master/employees.txt');
         xhr.send();
@@ -140,7 +143,7 @@ function getUserInfo(){
                 info.name = resp.name;
                 info.givenName = resp.given_name;
                 info.email = resp.email;
-                //addNewAnnotation(info.givenName,geoInfo.latitude,geoInfo.longitude);
+                addNewAnnotation(info.givenName,"tabachin #48",geoInfo.latitude,geoInfo.longitude);
             },
             onerror : function(e){
                 log.info(e.error);
@@ -164,7 +167,7 @@ function loginChek(){
     Titanium.Android.NotificationManager.notify(1, notification);
     getEmployees();
 }
-function addNewAnnotation(name,addrees,image,latitude,longitude){
+function addNewAnnotation(name,addrees,latitude,longitude){
     var addAnnotation;
         if(isAndroid){
             addAnnotation = Ti.Map.createAnnotation();
