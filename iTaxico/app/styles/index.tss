@@ -19,10 +19,18 @@
 	width: "40%",
 	left: "5%"
 }
-"#ride":{
+"#info":{
+	top: "3%",
+	height: "95%",
+	width: "50%",
+	right: "3%"
+}
+"#call":{
+	image:"/images/phone.png",
+	height: "20%",
+	width: "20%",
 	title:"raite",
-	bottom: "5%",
-	right: "20%"
+	bottom: "2%",
 }
 "#mapView":{
 	animate:true,

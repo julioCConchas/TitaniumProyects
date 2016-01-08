@@ -15,7 +15,7 @@
 			<ImageView id="userImg"/>
 			<View id="listContainer">
 				<ListView id="list">
-				   <ListSection id="listS" />
+				   <ListSection id="listS"/>
 			  </ListView>
 		  </View>
 		  <Button title="Notification" onClick="showModal" top="30"/>
@@ -23,7 +23,12 @@
 		<View id="modal" onClick="closeModal"></View>
 		<View id="detalle">
 			<ImageView id="imgEmpl"/>
-			<Button id="ride"/>
+			<View id="info">
+				<ListView id="listDetail">
+					<ListSection id="listDetailS"/>
+				</ListView>
+				<ImageView id="call"/>
+			</View>
 		</View>
 	</Window>
 </Alloy>

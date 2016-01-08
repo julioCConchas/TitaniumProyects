@@ -5,7 +5,7 @@ var info = {};
 var googleAuth = Alloy.Globals.googleAuth;
 var geoInfo = {};
 var routeRemove;
-var empImgs = [];
+var empInfo = [];
 
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
 Ti.Geolocation.distanceFilter = 10;
@@ -50,27 +50,54 @@ var notification = Titanium.Android.createNotification({
 
 // Send the notification.
 //Titanium.Android.NotificationManager.notify(1, notification);
-
-
-
 //--------------------------------------------->
+
 function doClick(e){
     var img;
+    var data = {};
 
-        for (var i = 0,size = empImgs.length; i < size; i++) {
-            if(e.annotation.title == empImgs[i].name){
-                $.imgEmpl.setImage(empImgs[i].image);
+        for (var i = 0,size = empInfo.length; i < size; i++) {
+            if(e.annotation.title == empInfo[i].name){
+                $.imgEmpl.setImage(empInfo[i].image);
+                $.listDetailS.setHeaderTitle(empInfo[i].name);
+                    data.addrees = empInfo[i].addrees;
+                    data.fee = empInfo[i].fee;
+                    data.type = empInfo[i].type;
             }
         }
     $.modal.setVisible(true);
     $.detalle.setVisible(true);
+
+    var items = [
+        {
+            properties : {
+                title: data.addrees,
+                backgroundColor:"#072775",
+                color:"white"
+            }
+        },
+        {
+            properties : {
+                title: data.fee,
+                backgroundColor:"#072775",
+                color:"white"
+            }
+        },
+        {
+            properties : {
+                title: data.type,
+                backgroundColor:"#072775",
+                color:"white"
+            }
+        }
+    ];
+    $.listDetail.sections[0].setItems(items);
 
     if(flag == false){
         createRoutes(e.annotation.latitude,e.annotation.longitude);
         flag = true;
     }
     else {
-        console.log("pos removi");
         $.mapView.removeRoute(routeRemove);
         createRoutes(e.annotation.latitude,e.annotation.longitude);
     }
@@ -90,14 +117,6 @@ function login(e){
         });
     });
 }
-function setAnnotations(){
-    //co workers annotations
-    addNewAnnotation("Peter",20.609186,-103.3989,null);
-    addNewAnnotation("Gwen",20.735919,-103.397714,null);
-    addNewAnnotation("Bruse",20.667626,-103.269821,null);
-    addNewAnnotation("Pancho",20.713446,-103.318882,null);
-    addNewAnnotation("Office",20.65731664,-103.39767158,null);
-}
 function getEmployees(){
     var xhr;
     var reso;
@@ -105,21 +124,30 @@ function getEmployees(){
 
         xhr = Ti.Network.createHTTPClient({
             onload : function(e){
+                //console.log(this.responseText);
                 resp = JSON.parse(this.responseText);
                 for (var i = 0, length = resp.employees.length; i < length; i++) {
                     employee = resp.employees[i];
                     info.name = employee.name;
                     info.image = employee.image;
-                    empImgs.push({
+                    empInfo.push({
                         name : employee.name,
-                        image : employee.image
+                        addrees: employee.addrees,
+                        image : employee.image,
+                        fee : employee.fee,
+                        phoneN : employee.phoneN,
+                        type : employee.type
                     });
                     addNewAnnotation(employee.name,employee.addrees,employee.latitude,employee.longitude);
                 }
                 //test
-                empImgs.push({
+                empInfo.push({
                     name: "Julio César",
-                    image : "/images/people.jpg"
+                    addrees: "tabachin #48",
+                    image : "/images/people.jpg",
+                    fee :"Free",
+                    phoneN :"3310157265",
+                    type : "looking for"
                 });
             },
             onerror : function(e){
@@ -162,7 +190,6 @@ function loginChek(){
         $.win.remove($.login);
         $.Bar.setVisible(true);
         $.mapView.setTouchEnabled(true);
-        //setAnnotations();
     }
     Titanium.Android.NotificationManager.notify(1, notification);
     getEmployees();
@@ -272,12 +299,6 @@ function showMenu(e){
         $.menuIcon.setLeft("5%");
     }
 }
-if(Ti.Platform.osname == "android"){
-    isAndroid = true;
-    $.win.addEventListener('open',function(e){
-        $.win.activity.actionBar.hide();
-    });
-}
 function closeModal(e){
     $.modal.setVisible(false);
     $.detalle.setVisible(false);
@@ -305,5 +326,10 @@ function showModal(e){
     }
 }
 
-
+if(Ti.Platform.osname == "android"){
+    isAndroid = true;
+    $.win.addEventListener('open',function(e){
+        $.win.activity.actionBar.hide();
+    });
+}
 $.win.open();
