@@ -18,7 +18,14 @@
 				   <ListSection id="listS"/>
 			  </ListView>
 		  </View>
-		  <Button title="Notification" onClick="showModal" top="30"/>
+		  <View id="btnsView">
+			  <ImageView id="nott" onClick="showModal" top="30"/>
+			  <ImageView id="sett"/>
+		  </View>
+		<!--
+		  <ImageView id="nott" onClick="showModal" top="30"/>
+		  <ImageView id="sett"/>
+	  -->
 		</View>
 		<View id="modal" onClick="closeModal"></View>
 		<View id="detalle">

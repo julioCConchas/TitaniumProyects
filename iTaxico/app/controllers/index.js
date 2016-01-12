@@ -4,7 +4,8 @@ var flag = false;
 var info = {};
 var googleAuth = Alloy.Globals.googleAuth;
 var geoInfo = {};
-var routeRemove;
+var routeRemove; // route for android
+var pointss; //route for ios
 var empInfo = [];
 
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
@@ -17,44 +18,12 @@ Ti.Geolocation.getCurrentPosition(function(e){
     }
     geoInfo.latitude  = e.coords.latitude;
     geoInfo.longitude = e.coords.longitude;
-    console.log("**latitude: " + e.coords.latitude + "\n**longitude: " + e.coords.longitude);
+    //console.log("**latitude: " + e.coords.latitude + "\n**longitude: " + e.coords.longitude);
 });
-
-//--------------------------------------------->
-    //notification test
-    // Intent object to launch the application
-var intent = Ti.Android.createIntent({
-    action: Ti.Android.ACTION_MAIN,
-    // Substitute the correct class name for your application
-    className: 'com.appcelerator.notificationsample.NotificationsampleActivity',
-    // Substitue the correct package name for your application
-    packageName: 'com.appcelerator.notificationsample'
-});
-intent.flags |= Ti.Android.FLAG_ACTIVITY_CLEAR_TOP | Ti.Android.FLAG_ACTIVITY_NEW_TASK;
-intent.addCategory(Ti.Android.CATEGORY_LAUNCHER);
-
-// Create a PendingIntent to tie together the Activity and Intent
-var pending = Titanium.Android.createPendingIntent({
-    intent: intent,
-    flags: Titanium.Android.FLAG_UPDATE_CURRENT
-});
-
-// Create the notification
-var notification = Titanium.Android.createNotification({
-    // icon is passed as an Android resource ID -- see Ti.App.Android.R.
-    icon: Ti.App.Android.R.drawable.appicon,
-    contentTitle: 'Something Happened',
-    contentText : 'Click to return to the application.',
-    contentIntent: pending
-});
-
-// Send the notification.
-//Titanium.Android.NotificationManager.notify(1, notification);
-//--------------------------------------------->
-
 function doClick(e){
     var img;
     var data = {};
+    var route;
 
         for (var i = 0,size = empInfo.length; i < size; i++) {
             if(e.annotation.title == empInfo[i].name){
@@ -98,7 +67,18 @@ function doClick(e){
         flag = true;
     }
     else {
-        $.mapView.removeRoute(routeRemove);
+        if(isAndroid){
+            $.mapView.removeRoute(routeRemove);
+        }
+        else{
+            route = Alloy.Globals.Map.createRoute({
+                name: 'My Route',
+                points: pointss,
+                color: 'purple',
+                width: 3
+            });
+            //$.mapView.removeRoute(route);
+        }
         createRoutes(e.annotation.latitude,e.annotation.longitude);
     }
 }
@@ -191,8 +171,8 @@ function loginChek(){
         $.Bar.setVisible(true);
         $.mapView.setTouchEnabled(true);
     }
-    Titanium.Android.NotificationManager.notify(1, notification);
-    getEmployees();
+        //Titanium.Android.NotificationManager.notify(1, notification);
+        getEmployees();
 }
 function addNewAnnotation(name,addrees,latitude,longitude){
     var addAnnotation;
@@ -249,13 +229,24 @@ function createRoutes(latitude,longitude){
                         });
                     }
                     //create route
-                    route = {
-                        name: 'My Route',
-                        points: points,
-                        color: 'purple',
-                        width: 3
-                    };
-                    routeRemove = route;
+                    if(Ti.Platform.osname == "android"){
+                        route = {
+                            name: 'My Route',
+                            points: points,
+                            color: 'purple',
+                            width: 3
+                        };
+                        routeRemove = route;
+                    }
+                    else{
+                        route = Alloy.Globals.Map.createRoute({
+                            name: 'My Route',
+                            points: pointss,
+                            color: 'purple',
+                            width: 3
+                        });
+                        pointss = pointss;
+                    }
                     $.mapView.addRoute(route);
             },
             onerror : function(){
@@ -270,10 +261,19 @@ function createRoutes(latitude,longitude){
         xhr.send();
 }
 function showMenu(e){
+    //type
+    //addrees
     var items = [
     	{
             properties : {
-                title: info.name,
+                title: "Tabachin #48",
+                backgroundColor:"#072775",
+                color:"white"
+            }
+        },
+        {
+            properties : {
+                title: "3310157265",
                 backgroundColor:"#072775",
                 color:"white"
             }
@@ -281,6 +281,13 @@ function showMenu(e){
     	{
             properties : {
                 title: info.email,
+                backgroundColor:"#072775",
+                color:"white"
+            }
+        },
+        {
+            properties : {
+                title: "Looking for",
                 backgroundColor:"#072775",
                 color:"white"
             }
@@ -330,6 +337,38 @@ if(Ti.Platform.osname == "android"){
     isAndroid = true;
     $.win.addEventListener('open',function(e){
         $.win.activity.actionBar.hide();
+
+        //--------------------------------------------->
+            //notification test
+            // Intent object to launch the application
+        var intent = Ti.Android.createIntent({
+            action: Ti.Android.ACTION_MAIN,
+            // Substitute the correct class name for your application
+            className: 'com.appcelerator.notificationsample.NotificationsampleActivity',
+            // Substitue the correct package name for your application
+            packageName: 'com.appcelerator.notificationsample'
+        });
+        intent.flags |= Ti.Android.FLAG_ACTIVITY_CLEAR_TOP | Ti.Android.FLAG_ACTIVITY_NEW_TASK;
+        intent.addCategory(Ti.Android.CATEGORY_LAUNCHER);
+
+        // Create a PendingIntent to tie together the Activity and Intent
+        var pending = Titanium.Android.createPendingIntent({
+            intent: intent,
+            flags: Titanium.Android.FLAG_UPDATE_CURRENT
+        });
+
+        // Create the notification
+        var notification = Titanium.Android.createNotification({
+            // icon is passed as an Android resource ID -- see Ti.App.Android.R.
+            icon: Ti.App.Android.R.drawable.appicon,
+            contentTitle: 'Something Happened',
+            contentText : 'Click to return to the application.',
+            contentIntent: pending
+        });
+
+        // Send the notification.
+        //Titanium.Android.NotificationManager.notify(1, notification);
+        //--------------------------------------------->
     });
 }
 $.win.open();

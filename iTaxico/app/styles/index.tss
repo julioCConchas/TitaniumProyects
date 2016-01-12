@@ -8,6 +8,22 @@
 	opacity: 0.5,
 	visible: false
 }
+"#nott":{
+	width: "20%",
+	height: "20%",
+	left: "12%",
+	image:"/images/bell.png",
+}
+"#sett":{
+	top: "16%",
+	width: "20%",
+	height: "20%",
+	left:"35%",
+	image:"/images/Settings.png",
+}
+"#btnsView":{
+	layout:"horizontal"
+}
 "#detalle":{
 	backgroundColor:"#072775",
 	width: Ti.UI.FILL,
@@ -117,7 +133,7 @@
 }
 "#listContainer":{
 	width: Ti.UI.FILL,
-	height: 200
+	height: 150
 }
 "#list":{
 	backgroundColor:"#072775",
